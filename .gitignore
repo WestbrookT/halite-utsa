@@ -1,3 +1,4 @@
 *.hlt
 log.txt
 __pycache__
+*.log
