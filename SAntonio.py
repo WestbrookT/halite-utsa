@@ -34,7 +34,7 @@ def direct(x, y, d):
 
 def move(x, y):
     site = gameMap.getSite(Location(x, y))
-    if site.strength > 150:
+    if site.strength > 100:
         p_grid[x][y] = 1
         if site.strength > 200:
             p_grid[x][y] = 1
@@ -78,20 +78,21 @@ def move(x, y):
         return 0
 
     if easy:
-        p_grid[x][y] = 3
+        p_grid[x][y] = 50
         tx, ty = direct(x, y, i)
-        p_grid[tx][ty] = 5
+        p_grid[tx][ty] = 100
 
     tx, ty = direct(x, y, best)
     if edge and not easy:
 
-        p_grid[x][y] = 10
+        p_grid[x][y] = 100
         for loc in locs:
             tx, ty = loc[0], loc[1]
-            p_grid[tx][ty] = 3
+            p_grid[tx][ty] = 50
 
         return 0
-    p_grid[tx][ty] += 1
+    p_grid[tx][ty] -= 1
+    p_grid[x][y] += 1
     return best
 
 
@@ -103,16 +104,17 @@ def decay(arr):
                 arr[x][y] -= 1
 
 
-sendInit("SAntonio")
+sendInit("sa2")
 while True:
     moves = []
     gameMap = getFrame()
 
     for y in range(gameMap.height):
         for x in range(gameMap.width):
-            p_grid[x][y] -= 1
+
             loc = gameMap.getSite(Location(x, y))
             if loc.owner == myID:
+                p_grid[x][y] -= 1
                 moves.append(Move(Location(x, y), move(x, y)))
             else:
                 p_grid[x][y] = loc.production
