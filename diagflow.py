@@ -125,7 +125,7 @@ def move(x, y):
 
 
 
-sendInit("SAntonio df")
+sendInit("diagflow")
 while True:
     log_grid(f, p_grid)
     moves = []

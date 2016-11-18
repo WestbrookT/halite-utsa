@@ -28,8 +28,6 @@ def log_grid(f, grid):
 height = gameMap.height
 width = gameMap.width
 p_grid = [[0]*height for i in range(width)]
-e_grid = [[0]*height for i in range(width)]
-
 def X(i):
     if i >= width:
         i -= width
@@ -73,7 +71,6 @@ def move(x, y):
                     best_dir = d
                 easy = True
             edge = True
-            e_grid[x][y] = True
 
         if not edge:
             if d == 0:
@@ -85,37 +82,13 @@ def move(x, y):
     if easy:
         tx, ty = direct(x, y, best_dir)
         p_grid[tx][ty] = p_grid[x][y]+1
-        e_grid[x][y] = False
         return best_dir
 
     if site.strength < site.production*2:
         return 0
 
-
-    diags = [(X(x-1), Y(y-1)), (X(x+1), Y(y-1)), (X(x+1), Y(y+1)), (X(x-1), Y(y+1))]
-    locs = [(X(x), Y(y - 1)), (X(x + 1), y), (x, Y(y + 1)), (X(x - 1), Y(y))]
     if edge and not easy:
         #Check diagonals in here
-
-        for d, loc in enumerate(locs):
-            xt, yt = loc[0], loc[1]
-
-            if e_grid[xt][yt] == True:
-                d1x, d1y = diags[d]
-
-                d2 = d + 1 if d < 3 else 0
-
-                ex, ey = direct(x, y, d+1)
-                esite = gameMap.getSite(Location(ex, ey))
-
-                d2x, d2y = diags[d2]
-
-                tsite1 = gameMap.getSite(Location(d1x, d2x))
-                tsite2 = gameMap.getSite(Location(d2x, d2y))
-
-                if (esite.strength + site.strength >= tsite1.strength and tsite1.owner != myID) or (esite.strength + site.strength >= tsite2.strength and tsite2.owner != myID):
-                    if randint(0, 10) > 8:
-                        return d+1
 
 
 
@@ -125,7 +98,7 @@ def move(x, y):
 
 
 
-sendInit("SAntonio df")
+sendInit("flow")
 while True:
     log_grid(f, p_grid)
     moves = []
@@ -138,7 +111,9 @@ while True:
             if loc.owner == myID:
 
                 moves.append(Move(Location(x, y), move(x, y)))
-
+            else:
+                #p_grid[x][y] = 0
+                pass
 
 
 

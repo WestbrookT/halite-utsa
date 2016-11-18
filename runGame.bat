@@ -1,1 +1,1 @@
-.\halite.exe -d "40 40" "python SAntonio.py" "python sa2.py"
+.\halite.exe -d "40 40" "python antbot.py" "python SAntonio.py"
