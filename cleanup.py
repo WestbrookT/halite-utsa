@@ -1,3 +1,4 @@
+"""Removes all replay (.hlt) files."""
 import os
 
 files = os.listdir()
