@@ -85,7 +85,7 @@ def move(x, y):
     tx, ty = direct(x, y, best)
     if edge and not easy:
 
-        p_grid[x][y] = 5
+        p_grid[x][y] = 10
         for loc in locs:
             tx, ty = loc[0], loc[1]
             p_grid[tx][ty] = 3
@@ -103,7 +103,7 @@ def decay(arr):
                 arr[x][y] -= 1
 
 
-sendInit("ant2")
+sendInit("SAntonio")
 while True:
     moves = []
     gameMap = getFrame()
